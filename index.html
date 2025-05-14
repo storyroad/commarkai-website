@@ -1,541 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CommarkAI</title>
-  <link rel="stylesheet" href="https://use.typekit.net/eco2omj.css">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    /* General Styles */
-    body {
-      background-image: linear-gradient(to right bottom, #0c59e8, #4e56dc, #6953d0, #7b52c4, #8751b9, #8d50b8, #9350b7, #984fb6, #9c4dbf, #a04ac7, #a448d0, #a845d9);
-      background-repeat: no-repeat;
-      background-size: cover;
-      color: white;
-      font-family: 'Muli', sans-serif;
-    }
-
-    h1, h2, h3, p, a {
-      font-family: 'Muli', sans-serif;
-    }
-
-    /* --- Layout & Sections --- */
-    .hero-section {
-      min-height: 70vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .workflow-section {
-      background: #f0f4f8;
-      color: #2d3748;
-      text-align: center;
-      padding: 4rem 2rem;
-    }
-
-    .submission-section {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-      background-color: #f7fafc;
-      text-align: center;
-    }
-
-    .testimonial-section {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-      background-color: #edf2f7;
-      text-align: center;
-    }
-
-    /* --- Reusable Components --- */
-    .container {
-      max-width: 960px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-
-    .form-container {
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    @media (min-width: 768px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    /* --- Typography --- */
-    .hero-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 2rem;
-    }
-
-    .hero-paragraph {
-      font-size: clamp(1.3rem, 2.8vw, 2rem);
-      max-width: 900px;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #2d3748;
-      margin-bottom: 2rem;
-    }
-
-    .workflow-paragraph {
-      font-size: clamp(1rem, 2vw, 1.5rem);
-      margin-bottom: 2rem;
-      color: #2d3748;
-    }
-
-    .testimonial-card {
-      background-color: white;
-      border-radius: 0.5rem;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .testimonial-text {
-      font-style: italic;
-      color: #4a5568;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-
-    .client-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    .client-name {
-      color: #2d3748;
-      font-weight: bold;
-    }
-
-    .client-details {
-      color: #718096;
-      font-size: 0.875rem;
-      margin-left: 0.25rem;
-    }
-
-    /* --- Logo --- */
-    .logo-container {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 90px 0;
-    }
-
-    .logo {
-      width: 900px;
-      max-width: 80%;
-      z-index: 2;
-    }
-
-    .logo-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 1000px;
-      height: 1000px;
-      border-radius: 50%;
-      background-image: radial-gradient(
-        circle,
-        rgba(100, 149, 237, 0.4),
-        rgba(192, 192, 192, 0.2),
-        rgba(216, 191, 216, 0.1),
-        transparent
-      );
-      opacity: 0.8;
-      animation: pulseGlow 5s infinite;
-      z-index: 1;
-    }
-
-    @keyframes pulseGlow {
-      0% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.8;
-      }
-
-      50% {
-        transform: translate(-50%, -50%) scale(1.1);
-        opacity: 0.9;
-      }
-
-      100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.8;
-      }
-    }
-
-    .orbiting-star {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      animation: orbit 5s linear infinite;
-      z-index: 3;
-    }
-
-    .orbiting-star:nth-child(1) {
-      top: -180px;
-      left: 50%;
-      transform: translate(-50%, 0);
-      animation-duration: 4s;
-      background-color: #add8e6;
-    }
-
-    .orbiting-star:nth-child(2) {
-      top: 50%;
-      right: -180px;
-      transform: translate(0, -50%);
-      animation-duration: 6s;
-      background-color: #d3d3d3;
-    }
-
-    .orbiting-star:nth-child(3) {
-      bottom: -180px;
-      left: 50%;
-      transform: translate(-50%, 0);
-      animation-duration: 8s;
-      background-color: #e0b0ff;
-    }
-
-    @keyframes orbit {
-      0% {
-        transform: rotate(0deg) translateX(360px) rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg) translateX(360px) rotate(-360deg);
-      }
-    }
-
-    .glittering-star {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background-color: white;
-      opacity: 0;
-      animation: glitter 1s infinite;
-      z-index: 4;
-    }
-
-    @keyframes glitter {
-      0% {
-        opacity: 0;
-      }
-
-      50% {
-        opacity: 0.7;
-      }
-
-      100% {
-        opacity: 0;
-      }
-    }
-
-    /* --- Form Styles --- */
-    .submission-form .mb-4 {
-      margin-bottom: 1rem;
-    }
-
-    .submission-form input[type="text"],
-    .submission-form input[type="email"],
-    .submission-form input[type="tel"],
-    .submission-form textarea {
-      display: block;
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #cbd5e0;
-      border-radius: 0.25rem;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      font-size: 1rem;
-      color: #2d3748;
-      outline: none;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-
-    .submission-form input:focus,
-    .submission-form textarea:focus {
-      border-color: #667eea;
-      box-shadow: 0 0 0 0.2rem rgba(108, 134, 234, 0.25);
-    }
-
-    .submission-form textarea {
-      min-height: 100px;
-    }
-
-    .submission-form button[type="submit"] {
-      background-color: #667eea;
-      color: white;
-      font-weight: bold;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.375rem;
-      transition: background-color 0.15s ease-in-out;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      outline: none;
-    }
-
-    .submission-form button[type="submit"]:hover {
-      background-color: #5a67d8;
-    }
-
-    /* --- Footer --- */
-    footer {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-      background-color: #2d3748;
-      text-align: center;
-      color: #a0aec0;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CommarkAI</title>
+    <link rel="stylesheet" href="https://use.typekit.net/eco2omj.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <section class="hero-section">
-    <div class="logo-container">
-      <div class="logo-glow"></div>
-      <img src="images/commarkailogofinal.png" alt="CommarkAI Logo Final" class="logo" />
-      <div class="orbiting-star"></div>
-      <div class="orbiting-star"></div>
-      <div class="orbiting-star"></div>
-      <div class="glittering-star" style="top: 10%; left: 20%; animation-delay: 0.2s;"></div>
-      <div class="glittering-star" style="top: 30%; left: 40%; animation-delay: 0.5s;"></div>
-      <div class="glittering-star" style="top: 50%; left: 10%; animation-delay: 0.1s;"></div>
-      <div class="glittering-star" style="top: 70%; left: 60%; animation-delay: 0.8s;"></div>
-      <div class="glittering-star" style="top: 20%; left: 80%; animation-delay: 0.3s;"></div>
-      <div class="glittering-star" style="top: 60%; left: 30%; animation-delay: 0.6s;"></div>
-    </div>
-    <h1 class="hero-title">Our AI Agents Will Book Your Leads While You Sleep</h1>
-    <p class="hero-paragraph">
-      AI-driven solutions with AI agents and strategic marketing to improve business
-      performance and processes.
-    </p>
-  </section>
-
-  <section class="workflow-section">
-    <h2 class="section-title">Interactive AI Workflow Visualization</h2>
-    <p class="workflow-paragraph">
-      See how leading software, CRMs, and LLMs connect seamlessly to power your
-      business.
-    </p>
-    <div class="workflow-container" id="workflow-container"></div>
-  </section>
-
-  <section class="submission-section" data-aos="fade-up">
-    <div class="container">
-      <h2 class="section-title">Ready to Experience CommarkAI?</h2>
-      <p>
-        Fill out the form below to learn more and get started.
-      </p>
-      <form
-        class="submission-form form-container"
-        data-aos="fade-up"
-        data-aos-delay="200"
-        action="https://script.google.com/a/macros/commarkai.com/s/AKfycbwm39AQf-8CTO-yDO84cMtNCm2oM1Pij24GdnBrNxs-2onyQAhkGTEDHczH9JRO_kHR/exec"  /* Replace with your script ID */
-        method="post"
-        id="google-sheets-form"
-      >
-        <div class="mb-4">
-          <input type="text" name="First Name" placeholder="Your Name" required />
+    <section class="hero-section">
+        <div class="logo-container">
+            <div class="logo-glow"></div>
+            <img src="images/commarkailogofinal.png" alt="CommarkAI Logo Final" class="logo" />
+            <div class="orbiting-star"></div>
+            <div class="orbiting-star"></div>
+            <div class="orbiting-star"></div>
+            <div class="glittering-star" style="top: 10%; left: 20%; animation-delay: 0.2s;"></div>
+            <div class="glittering-star" style="top: 30%; left: 40%; animation-delay: 0.5s;"></div>
+            <div class="glittering-star" style="top: 50%; left: 10%; animation-delay: 0.1s;"></div>
+            <div class="glittering-star" style="top: 70%; left: 60%; animation-delay: 0.8s;"></div>
+            <div class="glittering-star" style="top: 20%; left: 80%; animation-delay: 0.3s;"></div>
+            <div class="glittering-star" style="top: 60%; left: 30%; animation-delay: 0.6s;"></div>
         </div>
-        <div class="mb-4">
-          <input type="email" name="Email Address" placeholder="Your Email" required />
+        <h1 class="hero-title">Our AI Agents Will Book Your Leads While You Sleep</h1>
+        <p class="hero-paragraph">
+            AI-driven solutions with AI agents and strategic marketing to improve business
+            performance and processes.
+        </p>
+    </section>
+
+    <section class="workflow-section">
+        <h2 class="section-title">Interactive AI Workflow Visualization</h2>
+        <p class="workflow-paragraph">
+            See how leading software, CRMs, and LLMs connect seamlessly to power your
+            business.
+        </p>
+        <div class="workflow-container" id="workflow-container"></div>
+    </section>
+
+    <section class="submission-section">
+        <div class="container">
+            <h2 class="section-title">Ready to Experience CommarkAI?</h2>
+            <p>
+                Fill out the form below to learn more and get started.
+            </p>
+            <form
+                class="submission-form form-container"
+                action="https://script.google.com/a/macros/commarkai.com/s/AKfycbwm39AQf-8CTO-yDO84cMtNCm2oM1Pij24GdnBrNxs-2onyQAhkGTEDHczH9JRO_kHR/exec"
+                method="post"
+                id="google-sheets-form"
+            >
+                <div class="mb-4">
+                    <input type="text" name="First Name" placeholder="Your Name" required />
+                </div>
+                <div class="mb-4">
+                    <input type="email" name="Email Address" placeholder="Your Email" required />
+                </div>
+                <div class="mb-4">
+                    <input type="tel" name="Phone" placeholder="Phone Number (Optional)" />
+                </div>
+                <div class="mb-6">
+                    <textarea rows="4" name="Message" placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit">Get In Touch</button>
+            </form>
+            <div id="form-submission-response" style="margin-top: 1rem; color: green; display: none;"></div>
         </div>
-        <div class="mb-4">
-          <input type="tel" name="Phone" placeholder="Phone Number (Optional)" />
+    </section>
+
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "CommarkAI has revolutionized our lead generation process. The AI agents
+                        work tirelessly, and we've seen a significant increase in qualified
+                        leads."
+                    </p>
+                    <div class="client-info">
+                        <img src="https://via.placeholder.com/50" alt="Client 1" />
+                        <strong class="client-name">John Doe</strong>
+                        <span class="client-details">/ CEO, Example Inc.</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "The integration with our CRM was seamless, and the insights we've
+                        gained from CommarkAI's reporting are invaluable. Highly recommended!"
+                    </p>
+                    <div class="client-info">
+                        <img src="https://via.placeholder.com/50" alt="Client 2" />
+                        <strong class="client-name">Jane Smith</strong>
+                        <span class="client-details">/ Marketing Manager, Tech Solutions</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        "We were impressed with the level of customization and support
+                        provided by the CommarkAI team. Their AI agents truly understand our
+                        target audience."
+                    </p>
+                    <div class="client-info">
+                        <img src="https://via.placeholder.com/50" alt="Client 3" />
+                        <strong class="client-name">Peter Jones</strong>
+                        <span class="client-details">/ Founder, Innovate Now</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mb-6">
-          <textarea rows="4" name="Message" placeholder="Your Message"></textarea>
-        </div>
-        <button type="submit">Get In Touch</button>
-      </form>
-      <div id="form-submission-response" style="margin-top: 1rem; color: green; display: none;"></div>
-    </div>
-  </section>
+    </section>
 
-  <section class="testimonial-section" data-aos="fade-up">
-    <div class="container">
-      <h2 class="section-title">What Our Clients Say</h2>
-      <div class="grid" data-aos="fade-up" data-aos-delay="100">
-        <div class="testimonial-card">
-          <p class="testimonial-text">
-            "CommarkAI has revolutionized our lead generation process. The AI agents
-            work tirelessly, and we've seen a significant increase in qualified
-            leads."
-          </p>
-          <div class="client-info">
-            <img src="https://via.placeholder.com/50" alt="Client 1" />
-            <strong class="client-name">John Doe</strong>
-            <span class="client-details">/ CEO, Example Inc.</span>
-          </div>
-        </div>
+    <footer>
+        <p>&copy; 2025 CommarkAI. All rights reserved.</p>
+    </footer>
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
-            "The integration with our CRM was seamless, and the insights we've
-            gained from CommarkAI's reporting are invaluable. Highly recommended!"
-          </p>
-          <div class="client-info">
-            <img src="https://via.placeholder.com/50" alt="Client 2" />
-            <strong class="client-name">Jane Smith</strong>
-            <span class="client-details">/ Marketing Manager, Tech Solutions</span>
-          </div>
-        </div>
+    <script>
+        const workflowContainer = document.getElementById("workflow-container");
+        const nodes = [
+            { id: "AI", x: 50, y: 250 },
+            { id: "Slack", x: 300, y: 50 },
+            { id: "Trello", x: 300, y: 450 },
+            { id: "CRM", x: 550, y: 250 },
+        ];
 
-        <div class="testimonial-card">
-          <p class="testimonial-text">
-            "We were impressed with the level of customization and support
-            provided by the CommarkAI team. Their AI agents truly understand our
-            target audience."
-          </p>
-          <div class="client-info">
-            <img src="https://via.placeholder.com/50" alt="Client 3" />
-            <strong class="client-name">Peter Jones</strong>
-            <span class="client-details">/ Founder, Innovate Now</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        const connections = [
+            { from: "AI", to: "Slack" },
+            { from: "AI", to: "Trello" },
+            { from: "Slack", to: "CRM" },
+            { from: "Trello", to: "CRM" },
+        ];
 
-  <footer>
-    <p>&copy; 2025 CommarkAI. All rights reserved.</p>
-  </footer>
+        // Create nodes dynamically
+        nodes.forEach((node) => {
+            const div = document.createElement("div");
+            div.className = "node";
+            div.style.left = `${node.x}px`;
+            div.style.top = `${node.y}px`;
+            div.textContent = node.id;
+            div.dataset.id = node.id;
+            workflowContainer.appendChild(div);
+        });
 
-  <script>
-    const workflowContainer = document.getElementById("workflow-container");
-    const nodes = [
-      { id: "AI", x: 50, y: 250 },
-      { id: "Slack", x: 300, y: 50 },
-      { id: "Trello", x: 300, y: 450 },
-      { id: "CRM", x: 550, y: 250 },
-    ];
+        // Create connections dynamically
+        connections.forEach((conn) => {
+            const fromNode = nodes.find((node) => node.id === conn.from);
+            const toNode = nodes.find((node) => node.id === conn.to);
 
-    const connections = [
-      { from: "AI", to: "Slack" },
-      { from: "AI", to: "Trello" },
-      { from: "Slack", to: "CRM" },
-      { from: "Trello", to: "CRM" },
-    ];
+            const line = document.createElement("div");
+            line.className = "line";
 
-    // Create nodes dynamically
-    nodes.forEach((node) => {
-      const div = document.createElement("div");
-      div.className = "node";
-      div.style.left = `${node.x}px`;
-      div.style.top = `${node.y}px`;
-      div.textContent = node.id;
-      div.dataset.id = node.id;
-      workflowContainer.appendChild(div);
-    });
+            const startX = fromNode.x + 50;
+            const startY = fromNode.y + 50;
+            const endX = toNode.x + 50;
+            const endY = toNode.y + 50;
 
-    // Create connections dynamically
-    connections.forEach((conn) => {
-      const fromNode = nodes.find((node) => node.id === conn.from);
-      const toNode = nodes.find((node) => node.id === conn.to);
+            const width = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+            const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
 
-      const line = document.createElement("div");
-      line.className = "line";
+            line.style.width = `${width}px`;
+            line.style.transform = `rotate(${angle}deg)`;
+            line.style.left = `${startX}px`;
+            line.style.top = `${startY}px`;
 
-      const startX = fromNode.x + 50;
-      const startY = fromNode.y + 50;
-      const endX = toNode.x + 50;
-      const endY = toNode.y + 50;
+            workflowContainer.appendChild(line);
+        });
 
-      const width = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
-      const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI);
+        const form = document.getElementById('google-sheets-form');
+        const responseDiv = document.getElementById('form-submission-response');
 
-      line.style.width = `${width}px`;
-      line.style.transform = `rotate(${angle}deg)`;
-      line.style.left = `${startX}px`;
-      line.style.top = `${startY}px`;
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-      workflowContainer.appendChild(line);
-    });
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
 
-    const form = document.getElementById('google-sheets-form');
-    const responseDiv = document.getElementById('form-submission-response');
+            const formData = new FormData(form);
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault(); // Prevent the default form submission
+            const url = form.getAttribute('action');
 
-      // Disable the button to prevent multiple submissions
-      const submitButton = form.querySelector('button[type="submit"]');
-      submitButton.disabled = true;
-      submitButton.textContent = 'Submitting...';
+            fetch(url, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                responseDiv.textContent = 'Thank you for your submission!';
+                responseDiv.style.display = 'block';
 
-      const formData = new FormData(form);
+                form.reset();
 
-      // Construct the URL for the Google Apps Script
-      const url = form.getAttribute('action');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Get In Touch';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                responseDiv.textContent = 'Sorry, there was an error submitting your form. Please try again.';
+                responseDiv.style.display = 'block';
 
-      // Send the data to the Google Apps Script using fetch
-      fetch(url, {
-        method: 'POST',
-        body: formData,
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json(); // Or response.text(), depending on your script's output
-      })
-      .then(data => {
-        // Handle the response from the Google Apps Script
-        console.log('Success:', data);
-        responseDiv.textContent = 'Thank you for your submission!';
-        responseDiv.style.display = 'block';
-
-        // Reset the form
-        form.reset();
-
-        // Re-enable the button
-        submitButton.disabled = false;
-        submitButton.textContent = 'Get In Touch';
-      })
-      .catch(error => {
-        // Handle errors
-        console.error('Error:', error);
-        responseDiv.textContent = 'Sorry, there was an error submitting your form. Please try again.';
-        responseDiv.style.display = 'block';
-
-        // Re-enable the button
-        submitButton.disabled = false;
-        submitButton.textContent = 'Get In Touch';
-      });
-    });
-  </script>
+                submitButton.disabled = false;
+                submitButton.textContent = 'Get In Touch';
+            });
+        });
+    </script>
 </body>
 </html>
