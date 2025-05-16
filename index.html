@@ -58,27 +58,18 @@
             <p>
                 Fill out the form below to learn more and get started.
             </p>
-            <form
-                class="submission-form form-container"
-                action="https://script.google.com/macros/s/AKfycbw8uMZ9jw42g2Udl82P3pBVZSPKrkg0ZdyV5030Yaw6YYizaXOmlwwaZhib1Sm-Z5Ai/exec"
-                method="post"
-                id="google-sheets-form"
-            >
-                <div class="mb-4">
-                    <input type="text" name="First Name" placeholder="Your Name" required />
-                </div>
-                <div class="mb-4">
-                    <input type="email" name="Email Address" placeholder="Your Email" required />
-                </div>
-                <div class="mb-4">
-                    <input type="tel" name="Phone" placeholder="Phone Number (Optional)" />
-                </div>
-                <div class="mb-6">
-                    <textarea rows="4" name="Message" placeholder="Your Message"></textarea>
-                </div>
-                <button type="submit">Get In Touch</button>
-            </form>
-            <div id="form-submission-response" style="margin-top: 1rem; color: green; display: none;"></div>
+            <!-- HubSpot Form Embed START -->
+            <div id="hubspot-form"></div>
+            <script charset="utf-8" type="text/javascript" src="//js-na3.hsforms.net/forms/embed/v2.js"></script>
+            <script>
+              hbspt.forms.create({
+                portalId: "341849546",
+                formId: "7fccfc47-edaa-4c86-845d-98f1fdb43433",
+                region: "na3",
+                target: "#hubspot-form"
+              });
+            </script>
+            <!-- HubSpot Form Embed END -->
         </div>
     </section>
 
@@ -182,49 +173,7 @@
             workflowContainer.appendChild(line);
         });
 
-        const form = document.getElementById('google-sheets-form');
-        const responseDiv = document.getElementById('form-submission-response');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const submitButton = form.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
-
-            const formData = new FormData(form);
-
-            const url = form.getAttribute('action');
-
-            fetch(url, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-                responseDiv.textContent = 'Thank you for your submission!';
-                responseDiv.style.display = 'block';
-
-                form.reset();
-
-                submitButton.disabled = false;
-                submitButton.textContent = 'Get In Touch';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                responseDiv.textContent = 'Sorry, there was an error submitting your form. Please try again.';
-                responseDiv.style.display = 'block';
-
-                submitButton.disabled = false;
-                submitButton.textContent = 'Get In Touch';
-            });
-        });
+        // No form JavaScript needed for HubSpot embed!
     </script>
 </body>
 </html>
